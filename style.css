@@ -1,0 +1,46 @@
+.cormorant-garamond {
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+body{
+    background-color: #A65F45;
+    font-family: 'Merriweather', Georgia, serif;
+}
+
+h1, h2, h3{
+    font-family: "Edu NSW ACT Cursive", cursive;
+    font-size: 40px;
+    color: rgb(56, 25, 3);
+
+}
+
+.books{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+    gap: 50px;
+}
+
+.book-card{
+
+    min-height: 250px;
+    height: auto;
+
+    width: 100%;
+    margin: 15px;
+    padding: 15px;
+    background-color: #c92e2e;
+
+    border-radius: 15px;
+
+    font-size: 24px;
+}
+
+.book-card h2 {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word; /* Better browser support */
+}
