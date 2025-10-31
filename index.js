@@ -93,18 +93,57 @@ overlay.addEventListener("click", () => {
 form.addEventListener("submit", event => {
     event.preventDefault();
 
-    const title = form.elements.title.value;
-    const author = form.elements.author.value;
-    const pages = Number(form.elements.pages.value);
-    const isRead = form.elements.status.checked;
+    const title = form.elements.title;
+    const author = form.elements.author;
+    const pages = form.elements.pages;
 
-    addBooks(title, author, pages, isRead);
+    // Remove any old error messages
+    document.querySelectorAll(".error-message").forEach(el => el.remove());
+
+    let isValid = true;
+
+    // Title validation
+    if (!title.value.trim()) {
+        showError(title, "The title must be filled!");
+        isValid = false;
+    }
+
+    // Author validation
+    if (!author.value.trim()) {
+        showError(author, "The author name must be filled!");
+        isValid = false;
+    } else if (author.value.trim().length < 3) {
+        showError(author, "The author name must be at least 3 characters long!");
+        isValid = false;
+    }
+
+    // Pages validation
+    if (!pages.value.trim() || Number(pages.value) <= 0) {
+        showError(pages, "Please enter a valid number of pages!");
+        isValid = false;
+    }
+
+    if (!isValid) return; // Stop submission if invalid
+
+    // Proceed if valid
+    addBooks(title.value, author.value, Number(pages.value), form.elements.status.checked);
     displayBooks();
-
     form.reset();
     form.classList.remove("show");
     overlay.classList.remove("show");
 });
+
+// Helper to show error
+function showError(input, message) {
+    const error = document.createElement("p");
+    error.classList.add("error-message");
+    error.textContent = message;
+    error.style.color = "red";
+    error.style.fontSize = "14px";
+    error.style.marginTop = "5px";
+    input.insertAdjacentElement("afterend", error);
+}
+
 
 // Confirm delete
 confirmYes.addEventListener('click', () => {
